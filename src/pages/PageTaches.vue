@@ -93,6 +93,8 @@ export default {
           thisComp.$q.localStorage.set('utilisateur', thisComp.utilisateur)
         })
         .catch(function (error) {
+          thisComp.utilisateur = null
+          thisComp.taches = []
           alert(error.response.data.message)
           throw error
         })
@@ -108,6 +110,7 @@ export default {
           // Supprime l'utilisateur et ses tâches
           thisComp.utilisateur = null
           thisComp.taches = []
+          thisComp.$q.localStorage.set('utilisateur', '')
         })
     },
     getTaches () {
@@ -124,6 +127,13 @@ export default {
         .then(function (reponse) {
           console.log(reponse.data)
           thisComp.taches = reponse.data
+        })
+        .catch(function () {
+          alert('Récupération des tâches impossible !')
+          // En cas d'erreur on vide la liste et l'utilisateur
+          thisComp.utilisateur = null
+          thisComp.taches = []
+          thisComp.$q.localStorage.set('utilisateur', '')
         })
     }
   },

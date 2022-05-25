@@ -63,6 +63,8 @@ export default {
   },
   // Mounted se déclenche juste avant l'affichage du composant
   mounted () {
+    // Récupère la référence de notre composant
+    const thisComp = this
     // Token d'identification
     const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdG9kby5rb2RlLmNoXC9hcGlcL2xvZ2luIiwiaWF0IjoxNjUzNDY1MTEyLCJleHAiOjE2NTM0Njg3MTIsIm5iZiI6MTY1MzQ2NTExMiwianRpIjoiQTc2QklSQ2VIcENES1YyMyIsInN1YiI6NDAsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.7ph5j8GF-40TWkinCasaOh5maVi21SLiF4LY7_SPQzE'
     // Entête de configuration pour passer le token à l'API
@@ -71,6 +73,10 @@ export default {
     }
     // Récupération de la liste des tâches depuis l'API
     this.$api.get('taches', config)
+      .then(function (reponse) {
+        console.log(reponse.data)
+        thisComp.taches = reponse.data
+      })
   }
 }
 </script>

@@ -1,12 +1,15 @@
 <template>
   <q-page padding>
-      <h1>HOME</h1>
+
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-export default defineComponent({
+export default {
   name: 'IndexPage'
-})
+}
 </script>
+
+<style scoped>
+
+</style>

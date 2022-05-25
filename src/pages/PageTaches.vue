@@ -9,6 +9,10 @@
       </q-form>
     </div>
     <div v-else>
+      <p>
+        {{ utilisateur.name }}
+        <q-btn label="Se déconnecter" @click="deconnexion"/>
+      </p>
       <h3 v-if="taches.length === 0">Pas de tâches pour le moment...</h3>
       <q-list v-else separator bordered>
       <q-item
@@ -68,8 +72,8 @@ export default {
   name: 'PageTaches',
   data () {
     return {
-      email: '',
-      mdp: '',
+      email: 'user1@gmail.com',
+      mdp: '12345',
       utilisateur: null,
       taches: []
     }
@@ -85,6 +89,23 @@ export default {
           thisComp.utilisateur.token = reponse.data.access_token
           // Récupère les tâches de l'utilisateur
           thisComp.getTaches()
+        })
+        .catch(function (error) {
+          alert(error.response.data.message)
+          throw error
+        })
+    },
+    deconnexion () {
+      const thisComp = this
+      // Entête de configuration pour passer le token à l'API
+      const config = {
+        headers: { Authorization: 'Bearer ' + thisComp.utilisateur.token }
+      }
+      this.$api.post('logout', {}, config)
+        .then(function () {
+          // Supprime l'utilisateur et ses tâches
+          thisComp.utilisateur = null
+          thisComp.taches = []
         })
     },
     getTaches () {

@@ -89,6 +89,8 @@ export default {
           thisComp.utilisateur.token = reponse.data.access_token
           // Récupère les tâches de l'utilisateur
           thisComp.getTaches()
+          // Sauvegarde l'utilisateur dans le "cache" du navigateur, le local data stograge
+          thisComp.$q.localStorage.set('utilisateur', thisComp.utilisateur)
         })
         .catch(function (error) {
           alert(error.response.data.message)
@@ -127,7 +129,13 @@ export default {
   },
   // Mounted se déclenche juste avant l'affichage du composant
   mounted () {
-
+    // Récupère l'utilisateur dans le local storage
+    const localStorageUser = this.$q.localStorage.getItem('utilisateur')
+    // Si un utilisateur a été trouvé on le charge dans les data
+    if (localStorageUser) {
+      this.utilisateur = localStorageUser
+      this.getTaches()
+    }
   }
 }
 </script>

@@ -6,7 +6,28 @@
 
 <script>
 export default {
-  name: 'PageTaches'
+  name: 'PageTaches',
+  data () {
+    return {
+      taches: [
+        {
+          id: 1,
+          nom: 'Acheter des oranges',
+          terminee: false
+        },
+        {
+          id: 2,
+          nom: 'Manger des oranges',
+          terminee: false
+        },
+        {
+          id: 3,
+          nom: 'Digérer des oranges',
+          terminee: false
+        }
+      ]
+    }
+  }
 }
 </script>
 

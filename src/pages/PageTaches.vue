@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
-    <q-list separator bordered>
+    <h3 v-if="taches.length === 0">Pas de tâches pour le moment...</h3>
+    <q-list v-else separator bordered>
       <q-item
         v-for="tache in taches"
         :key="tache.id"
@@ -42,7 +43,7 @@
                 class="text-right"
                 caption
               >
-                <small>{{ tache.heureFin}}</small>
+                <small>{{ tache.heureFin }}</small>
               </q-item-label>
             </div>
           </div>
@@ -57,29 +58,7 @@ export default {
   name: 'PageTaches',
   data () {
     return {
-      taches: [
-        {
-          id: 1,
-          nom: 'Acheter des oranges',
-          terminee: false,
-          dateFin: '06.06.2020',
-          heureFin: '12:00'
-        },
-        {
-          id: 2,
-          nom: 'Manger des oranges',
-          terminee: false,
-          dateFin: '15.06.2020',
-          heureFin: '22:00'
-        },
-        {
-          id: 3,
-          nom: 'Digérer des oranges',
-          terminee: false,
-          dateFin: '16.06.2020',
-          heureFin: '14:00'
-        }
-      ]
+      taches: []
     }
   }
 }
